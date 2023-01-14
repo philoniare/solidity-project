@@ -70,7 +70,7 @@ contract CrowdFund {
     function cancel(uint _id) external {
         Campaign memory campaign = campaigns[_id];
         require(campaign.creator == msg.sender, "not creator");
-        require(block.timestamp < campaign.startAt, "started");
+        assert(block.timestamp < campaign.startAt);
 
         delete campaigns[_id];
         emit Cancel(_id);
@@ -79,7 +79,7 @@ contract CrowdFund {
     function pledge(uint _id, uint _amount) external {
         Campaign storage campaign = campaigns[_id];
         require(block.timestamp >= campaign.startAt, "not started");
-        require(block.timestamp <= campaign.endAt, "ended");
+        assert(block.timestamp <= campaign.endAt);
 
         campaign.pledged += _amount;
         pledgedAmount[_id][msg.sender] += _amount;
@@ -115,7 +115,9 @@ contract CrowdFund {
     function refund(uint _id) external {
         Campaign memory campaign = campaigns[_id];
         require(block.timestamp > campaign.endAt, "not ended");
-        require(campaign.pledged < campaign.goal, "pledged >= goal");
+        if(campaign.pledged < campaign.goal) {
+            revert("pledged >= goal");
+        }
 
         uint bal = pledgedAmount[_id][msg.sender];
         pledgedAmount[_id][msg.sender] = 0;
