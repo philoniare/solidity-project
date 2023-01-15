@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.17;
+import "@openzeppelin/upgrades/contracts/Initializable.sol";
 
 interface IERC20 {
     function transfer(address, uint) external returns (bool);
@@ -7,7 +8,7 @@ interface IERC20 {
     function transferFrom(address, address, uint) external returns (bool);
 }
 
-contract CrowdFund {
+contract CrowdFund is Initializable {
     event Launch(
         uint id,
         address indexed creator,
@@ -45,7 +46,7 @@ contract CrowdFund {
     // Mapping from campaign id => pledger => amount pledged
     mapping(uint => mapping(address => uint)) public pledgedAmount;
 
-    constructor(address _token) {
+    function initialize(address _token) public initializer {
         token = IERC20(_token);
     }
 
