@@ -4,6 +4,7 @@
   "sourceName": "contracts/CrowdFund.sol",
   "abi": [
     {
+      "constant": false,
       "inputs": [
         {
           "internalType": "address",
@@ -24,10 +25,12 @@
           "type": "bool"
         }
       ],
+      "payable": false,
       "stateMutability": "nonpayable",
       "type": "function"
     },
     {
+      "constant": false,
       "inputs": [
         {
           "internalType": "address",
@@ -53,6 +56,7 @@
           "type": "bool"
         }
       ],
+      "payable": false,
       "stateMutability": "nonpayable",
       "type": "function"
     }

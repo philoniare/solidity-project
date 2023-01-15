@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.17;
+pragma solidity 0.5.16;
 import "@openzeppelin/upgrades/contracts/Initializable.sol";
 
 interface IERC20 {
@@ -37,7 +37,7 @@ contract CrowdFund is Initializable {
         bool claimed;
     }
 
-    IERC20 public immutable token;
+    IERC20 public token;
     // Total count of campaigns created.
     // It is also used to generate id for new campaigns.
     uint public count;

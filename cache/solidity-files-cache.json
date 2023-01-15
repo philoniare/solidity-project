@@ -2,11 +2,11 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "/Users/philoniare/solidity/final_project/contracts/CrowdFund.sol": {
-      "lastModificationDate": 1673714843904,
-      "contentHash": "491f1b8940a3e17d941b588b6f13469b",
+      "lastModificationDate": 1673786735298,
+      "contentHash": "524fee003686acb31ce7308e31a4db8c",
       "sourceName": "contracts/CrowdFund.sol",
       "solcConfig": {
-        "version": "0.8.17",
+        "version": "0.5.16",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -28,9 +28,11 @@
           }
         }
       },
-      "imports": [],
+      "imports": [
+        "@openzeppelin/upgrades/contracts/Initializable.sol"
+      ],
       "versionPragmas": [
-        "^0.8.17"
+        "0.5.16"
       ],
       "artifacts": [
         "CrowdFund",
@@ -38,11 +40,11 @@
       ]
     },
     "/Users/philoniare/solidity/final_project/contracts/ERC20.sol": {
-      "lastModificationDate": 1673714843920,
-      "contentHash": "6a670b1bb37c09d001019e0340f28488",
+      "lastModificationDate": 1673785273053,
+      "contentHash": "57a782d32ea45dd1c21b71d4f8f3be07",
       "sourceName": "contracts/ERC20.sol",
       "solcConfig": {
-        "version": "0.8.17",
+        "version": "0.5.16",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -68,18 +70,18 @@
         "./IERC20.sol"
       ],
       "versionPragmas": [
-        "^0.8.17"
+        "0.5.16"
       ],
       "artifacts": [
         "ERC20"
       ]
     },
     "/Users/philoniare/solidity/final_project/contracts/IERC20.sol": {
-      "lastModificationDate": 1673714848181,
-      "contentHash": "191bbf3c9be1354fd14acd8f38f0662b",
+      "lastModificationDate": 1673785275585,
+      "contentHash": "be568edc03c36d9b2ee6c2c233a64d06",
       "sourceName": "contracts/IERC20.sol",
       "solcConfig": {
-        "version": "0.8.17",
+        "version": "0.5.16",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -103,10 +105,449 @@
       },
       "imports": [],
       "versionPragmas": [
-        "^0.8.17"
+        "0.5.16"
       ],
       "artifacts": [
         "IERC20"
+      ]
+    },
+    "/Users/philoniare/solidity/final_project/node_modules/@openzeppelin/upgrades/contracts/Initializable.sol": {
+      "lastModificationDate": 1673784980844,
+      "contentHash": "402d88f041ed1754339d60ae70077cd9",
+      "sourceName": "@openzeppelin/upgrades/contracts/Initializable.sol",
+      "solcConfig": {
+        "version": "0.5.16",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.4.24 <0.7.0"
+      ],
+      "artifacts": [
+        "Initializable"
+      ]
+    },
+    "/Users/philoniare/solidity/final_project/contracts/Factory.sol": {
+      "lastModificationDate": 1673784526406,
+      "contentHash": "de60347aa88247558d7153f64486d49a",
+      "sourceName": "contracts/Factory.sol",
+      "solcConfig": {
+        "version": "0.5.16",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/upgrades/contracts/Initializable.sol",
+        "@openzeppelin/upgrades/contracts/application/App.sol"
+      ],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "Factory"
+      ]
+    },
+    "/Users/philoniare/solidity/final_project/node_modules/@openzeppelin/upgrades/contracts/application/App.sol": {
+      "lastModificationDate": 1673784980838,
+      "contentHash": "bf6aa27cff75082399fd6f3ea34af88b",
+      "sourceName": "@openzeppelin/upgrades/contracts/application/App.sol",
+      "solcConfig": {
+        "version": "0.5.16",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./ImplementationProvider.sol",
+        "./Package.sol",
+        "../upgradeability/AdminUpgradeabilityProxy.sol",
+        "../ownership/Ownable.sol"
+      ],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "App"
+      ]
+    },
+    "/Users/philoniare/solidity/final_project/node_modules/@openzeppelin/upgrades/contracts/ownership/Ownable.sol": {
+      "lastModificationDate": 1673784980848,
+      "contentHash": "3a63ce008d7daa71f6d92c3e7d265a2b",
+      "sourceName": "@openzeppelin/upgrades/contracts/ownership/Ownable.sol",
+      "solcConfig": {
+        "version": "0.5.16",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "OpenZeppelinUpgradesOwnable"
+      ]
+    },
+    "/Users/philoniare/solidity/final_project/node_modules/@openzeppelin/upgrades/contracts/upgradeability/AdminUpgradeabilityProxy.sol": {
+      "lastModificationDate": 1673784980836,
+      "contentHash": "4e59cb28ff920327b530a0e897173225",
+      "sourceName": "@openzeppelin/upgrades/contracts/upgradeability/AdminUpgradeabilityProxy.sol",
+      "solcConfig": {
+        "version": "0.5.16",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./BaseAdminUpgradeabilityProxy.sol"
+      ],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "AdminUpgradeabilityProxy"
+      ]
+    },
+    "/Users/philoniare/solidity/final_project/node_modules/@openzeppelin/upgrades/contracts/application/Package.sol": {
+      "lastModificationDate": 1673784980849,
+      "contentHash": "78b7cec925a7dac3ca604835bed86e0f",
+      "sourceName": "@openzeppelin/upgrades/contracts/application/Package.sol",
+      "solcConfig": {
+        "version": "0.5.16",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../ownership/Ownable.sol"
+      ],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "Package"
+      ]
+    },
+    "/Users/philoniare/solidity/final_project/node_modules/@openzeppelin/upgrades/contracts/application/ImplementationProvider.sol": {
+      "lastModificationDate": 1673784980843,
+      "contentHash": "526ab04c4e39dd1e22e127dcb2f71dda",
+      "sourceName": "@openzeppelin/upgrades/contracts/application/ImplementationProvider.sol",
+      "solcConfig": {
+        "version": "0.5.16",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "ImplementationProvider"
+      ]
+    },
+    "/Users/philoniare/solidity/final_project/node_modules/@openzeppelin/upgrades/contracts/upgradeability/BaseAdminUpgradeabilityProxy.sol": {
+      "lastModificationDate": 1673784980839,
+      "contentHash": "a700de1d5fa4e30a65048a42c1019e4f",
+      "sourceName": "@openzeppelin/upgrades/contracts/upgradeability/BaseAdminUpgradeabilityProxy.sol",
+      "solcConfig": {
+        "version": "0.5.16",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./UpgradeabilityProxy.sol"
+      ],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "BaseAdminUpgradeabilityProxy"
+      ]
+    },
+    "/Users/philoniare/solidity/final_project/node_modules/@openzeppelin/upgrades/contracts/upgradeability/UpgradeabilityProxy.sol": {
+      "lastModificationDate": 1673784980854,
+      "contentHash": "1aa384007aa26f14904359f7bf8f9b0d",
+      "sourceName": "@openzeppelin/upgrades/contracts/upgradeability/UpgradeabilityProxy.sol",
+      "solcConfig": {
+        "version": "0.5.16",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./BaseUpgradeabilityProxy.sol"
+      ],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "UpgradeabilityProxy"
+      ]
+    },
+    "/Users/philoniare/solidity/final_project/node_modules/@openzeppelin/upgrades/contracts/upgradeability/BaseUpgradeabilityProxy.sol": {
+      "lastModificationDate": 1673784980840,
+      "contentHash": "ac4b5731261638436f353a536bc6455d",
+      "sourceName": "@openzeppelin/upgrades/contracts/upgradeability/BaseUpgradeabilityProxy.sol",
+      "solcConfig": {
+        "version": "0.5.16",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./Proxy.sol",
+        "../utils/Address.sol"
+      ],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "BaseUpgradeabilityProxy"
+      ]
+    },
+    "/Users/philoniare/solidity/final_project/node_modules/@openzeppelin/upgrades/contracts/utils/Address.sol": {
+      "lastModificationDate": 1673784980834,
+      "contentHash": "7ea532d4e55bc12e6fcbcefc0c29b56e",
+      "sourceName": "@openzeppelin/upgrades/contracts/utils/Address.sol",
+      "solcConfig": {
+        "version": "0.5.16",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "OpenZeppelinUpgradesAddress"
+      ]
+    },
+    "/Users/philoniare/solidity/final_project/node_modules/@openzeppelin/upgrades/contracts/upgradeability/Proxy.sol": {
+      "lastModificationDate": 1673784980851,
+      "contentHash": "9425865caf236f283ee7683039ba9623",
+      "sourceName": "@openzeppelin/upgrades/contracts/upgradeability/Proxy.sol",
+      "solcConfig": {
+        "version": "0.5.16",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.5.0"
+      ],
+      "artifacts": [
+        "Proxy"
       ]
     }
   }
