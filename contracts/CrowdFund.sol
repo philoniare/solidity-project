@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: MIT
+// Source: The starter code is initially from https://solidity-by-example.org/app/crowd-fund/.
 pragma solidity 0.5.16;
 import "@openzeppelin/upgrades/contracts/Initializable.sol";
 
@@ -21,12 +22,15 @@ contract CrowdFund is Initializable {
     event Unpledge(uint indexed id, address indexed caller, uint amount);
     event Claim(uint id);
     event Refund(uint id, address indexed caller, uint amount);
+    event Votes(uint id, address indexed caller);
 
     struct Campaign {
         // Creator of campaign
         address creator;
         // Amount of tokens to raise
         uint goal;
+        // Goal description of the campaign
+        string goalDescription;
         // Total amount pledged
         uint pledged;
         // Timestamp of start of campaign
@@ -43,14 +47,23 @@ contract CrowdFund is Initializable {
     uint public count;
     // Mapping from id to Campaign
     mapping(uint => Campaign) public campaigns;
+    // Mapping from id to number of donors
+    mapping(uint => uint) public campaignDonors;
+
     // Mapping from campaign id => pledger => amount pledged
     mapping(uint => mapping(address => uint)) public pledgedAmount;
+
+    // Mapping from campaign id => pledger => true if pledger has approved the campaign
+    mapping(uint => mapping(address => bool)) public votes;
+
+    // Mapping from campaign id => vote count
+    mapping(uint => uint) public voteCounts;
 
     function initialize(address _token) public initializer {
         token = IERC20(_token);
     }
 
-    function launch(uint _goal, uint32 _startAt, uint32 _endAt) external {
+    function launch(uint _goal, uint32 _startAt, uint32 _endAt, string _goalDescription) external {
         require(_startAt >= block.timestamp, "start at < now");
         require(_endAt >= _startAt, "end at < start at");
         require(_endAt <= block.timestamp + 90 days, "end at > max duration");
@@ -62,15 +75,27 @@ contract CrowdFund is Initializable {
             pledged: 0,
             startAt: _startAt,
             endAt: _endAt,
-            claimed: false
+            claimed: false,
+            goalDescription: _goalDescription
         });
 
         emit Launch(count, msg.sender, _goal, _startAt, _endAt);
     }
 
+    function vote(uint _id) external {
+        require(block.timestamp >= campaigns[_id].startAt, "voting not started");
+        require(!votes[_id][msg.sender], "already voted");
+
+        votes[_id][msg.sender] = true;
+        voteCounts[_id] += 1;
+        emit Voted(_id, msg.sender);
+    }
+
     function cancel(uint _id) external {
         Campaign memory campaign = campaigns[_id];
+        // Only campaign creator can cancel a campaign
         require(campaign.creator == msg.sender, "not creator");
+        // The campaign must not have been started
         assert(block.timestamp < campaign.startAt);
 
         delete campaigns[_id];
@@ -80,11 +105,13 @@ contract CrowdFund is Initializable {
     function pledge(uint _id, uint _amount) external {
         Campaign storage campaign = campaigns[_id];
         require(block.timestamp >= campaign.startAt, "not started");
+        require(voteCounts[_id] >= 10, "should be approved by at least 10 people to start pledging");
         assert(block.timestamp <= campaign.endAt);
 
         campaign.pledged += _amount;
         pledgedAmount[_id][msg.sender] += _amount;
         token.transferFrom(msg.sender, address(this), _amount);
+        campaignDonors[_id] += 1;
 
         emit Pledge(_id, msg.sender, _amount);
     }
@@ -106,6 +133,7 @@ contract CrowdFund is Initializable {
         require(block.timestamp > campaign.endAt, "not ended");
         require(campaign.pledged >= campaign.goal, "pledged < goal");
         require(!campaign.claimed, "claimed");
+        require(campaignDonors[_id] > 10, "should have at least 10 donors");
 
         campaign.claimed = true;
         token.transfer(campaign.creator, campaign.pledged);
@@ -116,6 +144,7 @@ contract CrowdFund is Initializable {
     function refund(uint _id) external {
         Campaign memory campaign = campaigns[_id];
         require(block.timestamp > campaign.endAt, "not ended");
+        // Unable to refund since goal was reached
         if(campaign.pledged >= campaign.goal) {
             revert("pledged >= goal");
         }
